@@ -49,9 +49,6 @@ export default function LoginPage() {
         </button>
       </form>
       
-      <button onClick={() => router.push('/')} className="mt-4 text-sm text-zinc-500">
-        Voltar atrás
-      </button>
     </div>
   );
 }

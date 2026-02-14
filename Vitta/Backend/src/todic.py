@@ -29,25 +29,27 @@ def user_to_dict(user):
 def save_user_to_json(user, filename):
     if filename == "":
         filename = "user_data.json"
-    with open(filename, 'write') as f:
+    with open(filename, 'a') as f:
         json.dump(user_to_dict(user), f)
+        f.write('\n')
 
-def load_user_from_json(filename):
+def load_user_from_json(filename, usersarray):
     with open (filename, 'r') as f:
-        data = json.load(f)
-        user = User(data["name"])
-        user.objectives = []
-        user.set_name(data["name"])
-        user.get_streak().set_count(int(data["streak"]["count"]))
-        user.get_streak().set_last_completed(date.fromisoformat(data["streak"]["last_completed"]))
-        user.get_streak().set_streak_freezes(int(data["streak"]["streak_freezes"]))
-        for obj_data in data["objectives"]:
-            objective = Objective()
-            objective.set_objective_name(obj_data["name"])
-            objective.set_atual(int(obj_data["atual"]))
-            objective.set_value(int(obj_data["value"]))
-            objective.set_status(obj_data["status"])
-            user.add_objective(objective)
-        return user 
-
+        for line in f:
+            if line.strip():
+                data = json.loads(line)
+                user = User(data["name"])
+                user.objectives = []
+                user.set_name(data["name"])
+                user.get_streak().set_count(int(data["streak"]["count"]))
+                user.get_streak().set_last_completed(date.fromisoformat(data["streak"]["last_completed"]))
+                user.get_streak().set_streak_freezes(int(data["streak"]["streak_freezes"]))
+                for obj_data in data["objectives"]:
+                    objective = Objective()
+                    objective.set_objective_name(obj_data["name"])
+                    objective.set_atual(int(obj_data["atual"]))
+                    objective.set_value(int(obj_data["value"]))
+                    objective.set_status(obj_data["status"])
+                    user.add_objective(objective)
+                    usersarray.append(user)
 

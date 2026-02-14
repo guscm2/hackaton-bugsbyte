@@ -2,34 +2,72 @@
 
 import { useRouter } from "next/navigation";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import Webcam from "react-webcam";
+import { savePhotoAndMetadata } from "./actions";
 
-export default function Camara() {
+
+
+export default function Camara() 
+{
   const router = useRouter();
 
   const webcamRef = useRef<Webcam>(null);
-  /*
-  const webcam = () => {
-    return (
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        videoConstraints={{ facingMode: "environment" }}
-      />
-    );
-  };
-  */
 
-  
+  const [mode, setMode] = useState<"photo" | "video">("photo");
+  const [isRecording, setIsRecording] = useState(false);
+  const [videoBlob, setVideoBlob] = useState<Blob | null>(null);
 
-  const capturePhoto = () => 
+
+  const capturePhoto = useCallback( async() => 
   {
     const imageSrc = webcamRef.current?.getScreenshot();
-    console.log(imageSrc);
-  };
+
+    if (imageSrc) 
+    {
+        const result = await savePhotoAndMetadata(imageSrc);
+
+        if (result.success) 
+        {
+          console.log("Photo saved successfully:", result.data);
+        } 
+        else 
+        {
+          console.error("Failed to save photo.");
+        }
+    } 
+    else 
+    {
+      console.error("Failed to capture photo.");
+    }
+
+  } , [webcamRef]);
+
+const startRecording = () => 
+{
+  // Lógica para iniciar a gravação de vídeo
+};
+
+const stopRecording = () => {
+  // Lógica para parar a gravação de vídeo e salvar o arquivo
+};
+
+const switchCamera = () => {
+  // Lógica para alternar entre câmeras (frontal e traseira)
+}
+
+const toggleFlash = () => {
+  // Lógica para ativar/desativar o flash (se suportado pelo dispositivo)
+}
+
+const saveVideoAndMetadata = async (videoBlob: Blob) => {
+  // Lógica para salvar o vídeo e seus metadados, similar ao processo de fotos
+}
+
+
+
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">

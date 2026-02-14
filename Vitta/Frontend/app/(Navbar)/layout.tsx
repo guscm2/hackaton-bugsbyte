@@ -16,8 +16,11 @@ export default function RootLayout({
           <Link href="/feed" className="hover:text-blue-500 font-bold">
             Feed
           </Link>
-        <Link href="/camara" className="hover:text-blue-500 font-bold">
+          <Link href="/camara" className="hover:text-blue-500 font-bold">
             Câmera
+          </Link>
+          <Link href="/leaderboard" className="hover:text-blue-500 font-bold">
+            Leaderboard
           </Link>
 
             <Link href="/perfil" className="ml-auto hover:text-blue-500 font-bold">

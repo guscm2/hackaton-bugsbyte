@@ -29,3 +29,17 @@ class Streak :
             self.reset_streak()
 
         self.last_completed = today
+
+    def get_streak_count(self):
+        return self.count
+    
+    def get_streak_freezes(self):
+        return self.streak_freezes
+    
+    def get_last_completed(self):
+        return self.last_completed
+    
+    def add_streak_freeze(self):
+        self.streak_freezes += 1
+    
+    pass

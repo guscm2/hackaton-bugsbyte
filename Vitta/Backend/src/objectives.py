@@ -33,3 +33,4 @@ class Objective:
         if self.atual >= self.value:
             self.status = "Completed"
     
+    pass

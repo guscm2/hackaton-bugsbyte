@@ -15,7 +15,6 @@ def executar_query(indice, args=()):
             cursor = conexao.cursor()
             cursor.execute(query, args)
             
-            # Se for SELECT, retorna os resultados
             if query.strip().upper().startswith("SELECT"):
                 colunas = [desc[0] for desc in cursor.description]
                 resultados = [dict(zip(colunas, row)) for row in cursor.fetchall()]

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 import path from "path";
 import fs from "fs";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import posts from "../../fotos.json";

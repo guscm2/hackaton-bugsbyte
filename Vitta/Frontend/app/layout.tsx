@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   description: "",
 };
 
+
+
 export default function RootLayout({
   children,
 }: {
@@ -27,13 +29,12 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body>
-        <header className="bg-black border-b p-4 flex gap-6">
-          {/* Usamos o componente Link para navegação rápida sem refresh */}
+        <header className="bg-black border-b p-4 flex gap-6"> 
           <Link href="/" className="hover:text-blue-500 font-bold">
             Home
           </Link>
           <Link href="/feed" className="hover:text-blue-500 font-bold">
-            Meu Feed
+            Feed
           </Link>
           <Link href="/perfil" className="hover:text-blue-500 font-bold">
             Perfil
@@ -44,7 +45,7 @@ export default function RootLayout({
           {children} {/* Aqui é onde o conteúdo de cada página vai aparecer */}
         </main>
 
-        <footer className="text-center p-10 text-gray-400">
+        <footer className="text-center p-10 text-white-400">
           © 2026 Vitta
         </footer>
       </body>

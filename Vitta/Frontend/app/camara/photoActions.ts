@@ -4,6 +4,8 @@ import { writeFile, readFile } from "fs/promises";
 import path from "path";
 import fs from "fs";
 
+
+
 export async function savePhotoAndMetadata(base64Data: string) 
 {
   const publicDir = path.join(process.cwd(), "public", "uploads", "contributions", "photos");
@@ -27,12 +29,12 @@ export async function savePhotoAndMetadata(base64Data: string)
     await writeFile(filePath, buffer);
 
     // 5. Atualizar o ficheiro JSON com os metadados
-    let fotos = [];
+    let contributions = [];
     try {
       const fileContent = await readFile(jsonPath, "utf-8");
-      fotos = JSON.parse(fileContent);
+      contributions = JSON.parse(fileContent);
     } catch (e) {
-      fotos = [];
+      contributions = [];
     }
 
     const novaEntrada = {
@@ -43,8 +45,8 @@ export async function savePhotoAndMetadata(base64Data: string)
       date: new Date().toISOString(),
     };
 
-    fotos.push(novaEntrada);
-    await writeFile(jsonPath, JSON.stringify(fotos, null, 2));
+    contributions.push(novaEntrada);
+    await writeFile(jsonPath, JSON.stringify(contributions, null, 2));
 
     return { success: true, data: novaEntrada };
   } catch (error) {

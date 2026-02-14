@@ -1,11 +1,13 @@
 from datetime import date 
+from user import User
 
 today = date.today()
 class Objective:
-    def __init__ (self, name, atual, value, status = "In Progress"):
+    def __init__ (self, name, atual, value, completed_today = False, status = "In Progress"):
         self.name = name
         self.atual = atual
         self.value = value
+        self.completed_today = completed_today
         self.status = status
 
     def get_name(self):
@@ -28,6 +30,9 @@ class Objective:
     
     def set_value(self, value):
         self.value = value
+
+    def set_completed_today(self, completed_today):
+        self.completed_today = completed_today
     
     def set_status(self, status):
         self.status = status
@@ -42,4 +47,7 @@ class Objective:
         if self.atual >= self.value:
             self.status = "Completed"
     
+    def completed_today(self):
+        self.completed_today = True
+
     pass

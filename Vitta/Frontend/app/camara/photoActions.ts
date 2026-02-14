@@ -4,6 +4,8 @@ import { writeFile, readFile } from "fs/promises";
 import path from "path";
 import fs from "fs";
 
+
+
 export async function savePhotoAndMetadata(base64Data: string) 
 {
   const publicDir = path.join(process.cwd(), "public", "uploads", "contributions", "photos");

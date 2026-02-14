@@ -15,7 +15,7 @@ export async function saveVideoAction(formData: FormData) {
 
   try {
     // 2. Definir o caminho da pasta (ex: public/uploads/videos)
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "videos");
+    const uploadDir = path.join(process.cwd(), "public", "uploads", "contributions", "videos");
 
     // 3. Garantir que a pasta existe (se não existir, cria-a)
     if (!fs.existsSync(uploadDir)) {
@@ -37,7 +37,7 @@ export async function saveVideoAction(formData: FormData) {
 
     return { 
       success: true, 
-      path: `/uploads/videos/${fileName}`,
+      path: `/uploads/contributions/videos/${fileName}`,
       message: "Vídeo guardado com sucesso!" 
     };
 

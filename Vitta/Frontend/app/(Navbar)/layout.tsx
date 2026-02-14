@@ -12,11 +12,12 @@ export default function RootLayout({
   return (
     <>
         <header className="bg-black border-b p-6 flex gap-6"> 
-          <Link href="/" className="hover:text-blue-500 font-bold">
-            Home
-          </Link>
+
           <Link href="/feed" className="hover:text-blue-500 font-bold">
             Feed
+          </Link>
+        <Link href="/camara" className="hover:text-blue-500 font-bold">
+            Câmera
           </Link>
 
             <Link href="/perfil" className="ml-auto hover:text-blue-500 font-bold">

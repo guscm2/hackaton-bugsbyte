@@ -29,17 +29,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body>
-        <header className="bg-black border-b p-4 flex gap-6"> 
-          <Link href="/" className="hover:text-blue-500 font-bold">
-            Home
-          </Link>
-          <Link href="/feed" className="hover:text-blue-500 font-bold">
-            Feed
-          </Link>
-          <Link href="/perfil" className="hover:text-blue-500 font-bold">
-            Perfil
-          </Link>
-        </header>
+
 
         <main className="max-w-4xl mx-auto p-6">
           {children} {/* Aqui é onde o conteúdo de cada página vai aparecer */}

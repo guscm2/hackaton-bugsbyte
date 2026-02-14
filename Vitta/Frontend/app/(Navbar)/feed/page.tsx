@@ -1,22 +1,28 @@
 'use client'
-import { auth } from "../lib/firebase";
+import { auth } from "../../lib/firebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useState, useEffect } from "react"; // 1. Importar hooks
 
-import postsData from "../../contributions.json";
+import postsData from "../../../contributions.json";
 
 export default function Feed() {
   const router = useRouter();
-  const posts = postsData || [];
+  const [isClient, setIsClient] = useState(false); // 2. Estado para verificar se é cliente
 
-  console.log("Posts carregados:", posts);
-  console.log("Número de posts:", posts.length);
+  // 3. Só ativa após a montagem no navegador
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const posts = postsData || [];
 
   const handleLogout = async () => {
     await signOut(auth);
     router.push('/');
   };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-zinc-900">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center py-8 px-4 bg-zinc-50 dark:bg-zinc-900">
@@ -50,13 +56,14 @@ export default function Feed() {
                     <div className="flex-1">
                       <p className="font-semibold text-zinc-900 dark:text-white">Usuário</p>
                       <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                        {new Date(post.date).toLocaleDateString('pt-BR', {
+                        {/* 4. Evita erro de data na hidratação */}
+                        {isClient ? new Date(post.date).toLocaleDateString('pt-BR', {
                           day: '2-digit',
                           month: 'short',
                           year: 'numeric',
                           hour: '2-digit',
                           minute: '2-digit'
-                        })}
+                        }) : "Carregando..."}
                       </p>
                     </div>
                   </div>
@@ -65,14 +72,17 @@ export default function Feed() {
                 {/* Mídia */}
                 <div className="relative w-full aspect-square bg-zinc-100 dark:bg-zinc-900">
                   {post.type === "video" ? (
-                    <video 
-                      src={post.path} 
-                      controls 
-                      className="w-full h-full object-contain"
-                      preload="metadata"
-                    >
-                      O seu navegador não suporta vídeos.
-                    </video>
+                    /* 5. A renderização do vídeo só ocorre no cliente para evitar erro de atributos */
+                    isClient && (
+                      <video 
+                        src={post.path} 
+                        controls 
+                        className="w-full h-full object-contain"
+                        preload="metadata"
+                      >
+                        O seu navegador não suporta vídeos.
+                      </video>
+                    )
                   ) : (
                     <Image
                       src={post.path}
@@ -80,6 +90,7 @@ export default function Feed() {
                       fill
                       className="object-contain"
                       unoptimized
+                      // 6. Removido crossOrigin se não houver erro de CORS explícito
                     />
                   )}
                 </div>

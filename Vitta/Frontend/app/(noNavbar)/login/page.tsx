@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { loginUsuario } from '../lib/firebase';
+import { loginUsuario } from '../../lib/firebase';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {

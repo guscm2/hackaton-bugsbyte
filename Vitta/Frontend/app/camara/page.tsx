@@ -46,11 +46,31 @@ export default function Camara()
 
 const startRecording = () => 
 {
-  // Lógica para iniciar a gravação de vídeo
+    setIsRecording(true);
+    const stream = webcamRef.current?.stream;   
+    if (stream)
+    {      const mediaRecorder = new MediaRecorder(stream);
+      const chunks: BlobPart[] = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          chunks.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const videoBlob = new Blob(chunks, { type: "video/webm" });
+        setVideoBlob(videoBlob);
+        saveVideoAndMetadata(videoBlob);
+      };
+
+      mediaRecorder.start();
+    }
 };
 
-const stopRecording = () => {
-  // Lógica para parar a gravação de vídeo e salvar o arquivo
+const stopRecording = () => 
+{
+  setIsRecording(false);
 };
 
 const switchCamera = () => {

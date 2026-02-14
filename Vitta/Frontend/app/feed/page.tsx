@@ -5,7 +5,7 @@ import fs from "fs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import posts from "../../fotos.json";
+import posts from "../../contributions.json";
 
 export default function Feed() {
   return (
@@ -14,14 +14,24 @@ export default function Feed() {
         <section className="feed-container">
           {posts.map((post) => (
             <div key={post.id} className="post-card">
-              <div className="image-wrapper">
-                <Image
-                  src={post.path}
-                  alt= "Foto de contribuição"
-                  width={500} // Define uma largura base
-                  height={500} // Define uma altura base
-                  className="rounded-lg object-cover"
-                />
+              <div className="media-wrapper relative aspect-square w-full">
+                {post.type === "video" ? (
+                  <video 
+                    src={post.path} 
+                    controls 
+                    className="w-full h-full object-cover"
+                    preload="metadata"
+                  >
+                    O seu navegador não suporta vídeos.
+                  </video>
+                ) : (
+                  <Image
+                    src={post.path}
+                    alt="Contribuição"
+                    fill // Usa 'fill' para preencher o wrapper responsivamente
+                    className="object-cover"
+                  />
+                )}
               </div>
             </div>
           ))}

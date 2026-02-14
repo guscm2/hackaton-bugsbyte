@@ -33,6 +33,28 @@ export async function saveVideoAction(formData: FormData) {
     // 6. Escrever o ficheiro no disco
     await writeFile(filePath, buffer);
 
+    let contributions = [];
+    const jsonPath = path.join(process.cwd(), "contributions.json");
+
+    // 7. Atualizar o ficheiro JSON com os metadados do vídeo
+    try {
+      const fileContent = await fs.promises.readFile(jsonPath, "utf-8");
+      contributions = JSON.parse(fileContent);
+    } catch (e) {
+      contributions = [];
+    }
+
+    const newEntry = {
+      id: Date.now(),
+      fileName: fileName,
+      type: "video",
+      date: new Date().toISOString(),
+    };
+
+    contributions.push(newEntry);
+
+    await fs.promises.writeFile(jsonPath, JSON.stringify(contributions, null, 2));
+
     console.log(`Vídeo guardado em: ${filePath}`);
 
     return { 

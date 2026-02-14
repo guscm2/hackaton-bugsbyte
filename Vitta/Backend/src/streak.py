@@ -1,14 +1,14 @@
 from datetime import date, timedelta
 
 class Streak :
-    def innit(self, freezes = 0):
+    def __init__(self, freezes = 0):
         self.count = 0
         self.last_completed = None
         self.streak_freezes = freezes
 
     def set_count(self, count):
         self.count = count
-        
+
     def set_last_completed(self, last_completed):
         self.last_completed = last_completed
 

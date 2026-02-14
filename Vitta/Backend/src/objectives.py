@@ -37,17 +37,29 @@ class Objective:
     def set_status(self, status):
         self.status = status
 
-    def update_objective(self):
-        self.atual += 1
-        if self.name != "Peso":
-            if today.isoweekday() == 7:
-                self.atual = 0
+    def update_peso_objective(self, peso):
+        if self.name == "Peso":
+            self.atual = peso
+            self.completed_today = True
+        if self.atual <= self.value:
+            self.status = "Completed"
 
     def completed_objective(self):
         if self.atual >= self.value:
             self.status = "Completed"
-    
-    def completed_today(self):
-        self.completed_today = True
+
+    def update_objective(self):
+        if self.completed_today:
+            return
+        else:
+            self.completed_today = True
+            if self.name != "Peso":
+                self.atual += 1
+                self.completed_objective()
+                if today.isoweekday() == 7:
+                    self.atual = 0
+        
+            else:
+                self.update_peso_objective(self, self.atual)
 
     pass

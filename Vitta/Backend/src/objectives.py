@@ -3,12 +3,13 @@ from user import User
 
 today = date.today()
 class Objective:
-    def __init__ (self, name, atual, value, completed_today = False, status = "In Progress"):
+    def __init__ (self, name, atual, value, completed_today = False, status = "In Progress", contributions = []):
         self.name = name
         self.atual = atual
         self.value = value
         self.completed_today = completed_today
         self.status = status
+        self.contributions = contributions
 
     def get_name(self):
         return self.name
@@ -21,6 +22,12 @@ class Objective:
     
     def get_value(self):
         return self.value
+    
+    def get_completed_today(self):
+        return self.completed_today
+    
+    def get_contributions(self):
+        return self.contributions
 
     def set_objective_name(self,name):
         self.name = name
@@ -36,6 +43,9 @@ class Objective:
     
     def set_status(self, status):
         self.status = status
+
+    def set_contributions(self, contributions):
+        self.contributions = contributions
 
     def update_peso_objective(self, peso):
         if self.name == "Peso":
@@ -62,4 +72,9 @@ class Objective:
             else:
                 self.update_peso_objective(self, self.atual)
 
+    def count_contribution(self, data):
+        count = 0
+        for contribution in self.contributions:
+            contribution.count_contribution(data, count)
+        return count
     pass

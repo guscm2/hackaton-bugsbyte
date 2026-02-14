@@ -12,6 +12,6 @@ def compare_points(user1, user2):
     else:
         return 0
 
-def calcleaderboard(users):
+def calc_leaderboard_points(users):
     leaderboard = sorted(users, key = compare_points, reverse = True)
     return leaderboard

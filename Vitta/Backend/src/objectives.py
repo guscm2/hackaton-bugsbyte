@@ -11,11 +11,17 @@ class Objective:
     def get_name(self):
         return self.name
     
+    def get_atual(self):
+         return self.atual
+    
     def get_status(self):
         return self.status
     
-    def get_atual(self):
-         return self.atual
+    def get_value(self):
+        return self.value
+
+    def set_objective_name(self,name):
+        self.name = name
 
     def set_atual(self, atual):
         self.atual = atual
@@ -23,6 +29,9 @@ class Objective:
     def set_value(self, value):
         self.value = value
     
+    def set_status(self, status):
+        self.status = status
+
     def update_objective(self):
         self.atual += 1
         if self.name != "Peso":
@@ -33,3 +42,4 @@ class Objective:
         if self.atual >= self.value:
             self.status = "Completed"
     
+    pass

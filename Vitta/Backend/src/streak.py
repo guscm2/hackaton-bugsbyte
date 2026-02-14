@@ -6,6 +6,27 @@ class Streak :
         self.last_completed = None
         self.streak_freezes = freezes
 
+    def set_count(self, count):
+        self.count = count
+        
+    def set_last_completed(self, last_completed):
+        self.last_completed = last_completed
+
+    def set_streak_freezes(self, streak_freezes):
+        self.streak_freezes = streak_freezes
+
+    def get_streak_count(self):
+        return self.count
+    
+    def get_streak_freezes(self):
+        return self.streak_freezes
+    
+    def get_last_completed(self):
+        return self.last_completed
+    
+    def add_streak_freeze(self):
+        self.streak_freezes += 1
+    
     def reset_streak(self):
         self.count = 0
 
@@ -30,16 +51,4 @@ class Streak :
 
         self.last_completed = today
 
-    def get_streak_count(self):
-        return self.count
-    
-    def get_streak_freezes(self):
-        return self.streak_freezes
-    
-    def get_last_completed(self):
-        return self.last_completed
-    
-    def add_streak_freeze(self):
-        self.streak_freezes += 1
-    
     pass

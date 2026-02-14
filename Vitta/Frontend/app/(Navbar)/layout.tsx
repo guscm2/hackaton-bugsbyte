@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function RootLayout({
   children,
@@ -11,7 +12,14 @@ export default function RootLayout({
 }) {
   return (
     <>
-        <header className="bg-black border-b p-6 flex gap-6"> 
+        <header className="bg-black border-b p-6 flex items-center gap-6">
+
+          <Image
+            src="/logo.svg"
+            alt="Logo do Vitta"
+            width={60}
+            height={60}
+          /> 
 
           <Link href="/feed" className="hover:text-blue-500 font-bold">
             Feed

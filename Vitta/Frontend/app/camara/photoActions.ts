@@ -6,7 +6,7 @@ import fs from "fs";
 
 export async function savePhotoAndMetadata(base64Data: string) 
 {
-  const publicDir = path.join(process.cwd(), "public", "photos", "contributions");
+  const publicDir = path.join(process.cwd(), "public", "uploads", "contributions", "photos");
   const jsonPath = path.join(process.cwd(), "fotos.json");
 
   // 1. Garantir que a pasta public/photos existe
@@ -38,7 +38,7 @@ export async function savePhotoAndMetadata(base64Data: string)
     const novaEntrada = {
       id: Date.now(),
       fileName: fileName,
-      path: `/photos/contributions/${fileName}`, // URL relativo para usar no componente <Image />
+      path: `/uploads/contributions/photos/${fileName}`, // URL relativo para usar no componente <Image />
       date: new Date().toISOString(),
     };
 

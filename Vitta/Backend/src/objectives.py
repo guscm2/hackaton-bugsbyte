@@ -11,11 +11,14 @@ class Objective:
     def get_name(self):
         return self.name
     
+    def get_atual(self):
+         return self.atual
+    
     def get_status(self):
         return self.status
     
-    def get_atual(self):
-         return self.atual
+    def get_value(self):
+        return self.value
 
     def set_atual(self, atual):
         self.atual = atual

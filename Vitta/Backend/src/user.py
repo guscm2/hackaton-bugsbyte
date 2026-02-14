@@ -7,6 +7,9 @@ class User:
         self.streak = streak
         self.objectives = objectives
     
+    def set_name(self, name):
+        self.name = name
+        
     def set_objectives(self, objectives):
         self.objectives = objectives
 
